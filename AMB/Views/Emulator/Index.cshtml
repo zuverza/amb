@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+</head>
+<body>
+    <aside id="platform-preview" class="platform-preview fixey">
+
+        <div id="demo-device-android" ng-class="previewPlatform" ng-show="androidActive" class="android" style="">
+            <iframe id="demo-android" src="~/" frameborder="0"></iframe>
+        </div>
+
+        @*<div id="demo-device-ios" ng-class="previewPlatform" ng-show="iosActive" class="ios" style="">
+            <iframe id="demo-ios" src="~/?production=true&amp;ionicplatform=ios" frameborder="0"></iframe>
+        </div>*@
+    </aside>
+
+
+</body>
+</html>

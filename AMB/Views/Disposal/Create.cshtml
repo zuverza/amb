@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a date</h2>
+
+
+
+
+@Html.Partial("_Form")
+
+@section Scripts{
+
+    <script type="text/javascript">
+      
+        $(function () {
+            var self = this;
+             self.disposalTime = false;
+             self.returnTime = false;
+            self.day = false
+            self.submit = $("#submit");
+            $('#datetimepicker3').datetimepicker({
+                format: 'LT'
+            }).on("changeDate", function (e) {
+               
+            });;
+            $('#datetimepicker4').datetimepicker({
+                format: 'LT'
+            });
+            $("#datetimepicker3 ").on("dp.change", function (e) {
+                self.disposalTime = true;
+                var $day = $("#day").find(":selected").text();
+                if ($day && self.disposalTime && self.returnTime) {
+                    var m1 = moment($("#disposalTime").val(), 'h:mm A');
+                    var m2 = moment($("#returnTime").val(), 'h:mm A');
+                    if (!m1.isBefore(m2)) {
+                        $("#datetimepicker4").addClass("has-error");
+                        $("#datetimepicker3").addClass("has-error");
+                        $("#error").html("Disposal time must be earlier than return time.");
+                        self.submit.hide(600)
+
+                    }
+                    else {
+                        $("#datetimepicker4").removeClass("has-error");
+                        $("#datetimepicker3").removeClass("has-error");
+                        $("#error").html("");
+                        self.submit.show(600)
+                    }
+
+                }
+            });
+
+            $("#datetimepicker4 ").on("dp.change", function (e) {
+                self.returnTime = true;
+                var $day = $("#day").find(":selected").text();
+                console.log($day && self.disposalTime && self.returnTime)
+                if ($day && self.disposalTime && self.returnTime) {
+                    var m1 = moment($("#disposalTime").val(), 'h:mm A');
+                    var m2 = moment($("#returnTime").val(), 'h:mm A');
+                    if (!m1.isBefore(m2)) {
+                        $("#datetimepicker4").addClass("has-error");
+                        $("#datetimepicker3").addClass("has-error");
+                        $("#error").html("Disposal time must be earlier than return time.");
+                        self.submit.hide(600)
+
+                    }
+                    else {
+                        $("#datetimepicker4").removeClass("has-error");
+                        $("#datetimepicker3").removeClass("has-error");
+                        $("#error").html("");
+                        self.submit.show(600)
+                    }
+
+                }
+            });
+
+            $("select").change(function () {
+
+                var $day = $("#day").find(":selected").text();
+                if ($day && self.disposalTime && self.returnTime) {
+                    var m1 = moment($("#disposalTime").val(), 'h:mm A');
+                    var m2 = moment($("#returnTime").val(), 'h:mm A');
+                    var m1 = moment($("#disposalTime").val(), 'h:mm A');
+                    var m2 = moment($("#returnTime").val(), 'h:mm A');
+                    if (!m1.isBefore(m2)) {
+                        $("#datetimepicker4").addClass("has-error");
+                        $("#datetimepicker3").addClass("has-error");
+                        $("#error").html("Disposal time must be earlier than return time.");
+                        self.submit.hide(600)
+                    }
+                    else {
+                        $("#datetimepicker4").removeClass("has-error");
+                        $("#datetimepicker3").removeClass("has-error");
+                        $("#error").html("");
+                        self.submit.show(600)
+                    }
+                }
+            })
+
+
+
+         
+                
+             
+
+
+         
+        });
+    </script>
+}

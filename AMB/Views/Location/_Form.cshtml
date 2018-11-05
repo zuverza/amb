@@ -1,0 +1,38 @@
+﻿@model AMB.Models.Location
+
+<p><b>Instructions:</b> Place the bin in the desired location, Click get coordinates. The current position should be loaded automatically.</p>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @*@Html.Label("Disposal Coordinates:")*@
+                @Html.HiddenFor(x => x.StorageLatitude)
+                @Html.HiddenFor(x => x.StorageLongitude)
+                <p class="btn btn-success hidden" id="storage-success">Storage Coordinates loaded</p>
+                <input type="button" value="Get Storage Coordinates" class="btn btn-default get-disposal-position" />
+                <br />
+
+                <br />
+
+                @*@Html.Label("Storage Coordinates:")*@
+                @Html.HiddenFor(x => x.DisposalLongitude)
+                @Html.HiddenFor(x => x.DisposalLatitude)
+                <input type="button" value="Get Disposal Coordinates" class="btn btn-default get-storage-position" />
+                <br />
+                <br/>
+                <input id="submit" type="submit" style="display:none" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+
+

@@ -1,0 +1,92 @@
+﻿@model AMB.Models.Location
+
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a location</h2>
+
+
+
+
+@Html.Partial("_Form")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+            var setDisposal = false;
+            var setstorage= false;
+
+            $(".get-disposal-position").click(function () {
+                var position = {
+                    latitude: 31.7702144,
+                    longitude: -106.5050112
+                };
+                setDisposal = true;
+                updateDisposalPosition(position)
+
+                $(this).removeClass("btn-default").addClass("btn-success").val("Disposal Coordinates loaded");
+                
+            })
+
+
+            $(".get-storage-position").click(function () {
+                var position = {
+
+                    latitude: 31.8002144,
+                    longitude: -106.5468012
+
+                };
+                setstorage = true;
+                updateStoragePosition(position)
+
+                $(this).removeClass("btn-default").addClass("btn-success").val("Storage Coordinates loaded");
+
+                //navigator.geolocation.getCurrentPosition(function (pos) {
+                //    self.position = pos
+                //    updateStoragePosition(self.position)
+
+
+                //}, function () {
+                //    self.position = {
+                //        coords: {
+                //            latitude: 31.7702144,
+                //            longitude: -106.5050112
+                //        }
+                //    };
+                //    updateStoragePosition(self.position)
+
+                //});
+
+            })
+
+            function updateStoragePosition(position) {
+                $("#StorageLatitude").val(position.latitude);
+                $("#StorageLongitude").val(position.longitude);
+                showSave();
+            }
+            function showSave() {
+
+                console.log()
+
+                if (setDisposal && setstorage) {
+                    $("#submit").show(600);
+
+                }
+            }
+
+            function updateDisposalPosition(position) {
+                console.log(position.latitude)
+                $("#DisposalLatitude").val(position.latitude);
+                $("#DisposalLongitude").val(position.longitude); DisposalLongitude
+                showSave();
+            }
+        })
+
+    </script>
+
+}

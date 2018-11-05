@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Auto Mobility Bin</h1>
+    <p class="lead">Auto Mobility Bin is the solution to a fully automated trash disposal method. </p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @if (Session["Location"] != null)
+        {
+            AMB.Models.Location location = (AMB.Models.Location)Session["Location"];
+            <div class="row bg-success" style="padding:15px;">
+                <div clsas="col-md-12 ">
+                    <h2>Locations are set.</h2>
+
+                    <p><b>Disposal coordinates:</b> [@location.DisposalLatitude, @location.DisposalLongitude] </p>
+                    <p><b>Storage coordinates:</b> [@location.StorageLatitude, @location.StorageLongitude] </p>
+                    <p>@Html.ActionLink("Update Locations", "Create", new { controller = "Location" }, new { @class = "btn btn-default" })</p>
+                </div>
+            </div>
+        }
+
+        @if (Session["Disposal"] != null)
+        {
+            AMB.Models.Disposal disposal = (AMB.Models.Disposal)Session["Disposal"];
+
+            <br/><br/>
+            <div class="row bg-success" style="padding:15px;">
+                <div clsas="col-md-12 ">
+
+                    <h2>Disposal time is set.</h2>
+                    <p><b>Days:</b> Every @disposal.day</p>
+                    <p><b>Disposal time:</b> @disposal.disposalTime</p>
+                    <p><b>Return time:</b> @disposal.returnTime</p>
+                    <p>@Html.ActionLink("Update Disposal Date/Time", "Create", new { controller = "Disposal" }, new { @class = "btn btn-default" })</p>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+<div class="row">
+    @if (Session["Disposal"] == null && Session["Location"] == null)
+    {
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                AMB is configurable to set the disposal and storage locations of the bin in a 2 step process.
+            </p>
+        </div>
+    }
+    @if (Session["Location"] == null)
+    {
+        <div class="col-md-4">
+            <h2>Step 1: Set locations</h2>
+            <p>By setting disposal and storage locations, the bin will be aware of the disposal and storage locations.</p>
+            <p>@Html.ActionLink("Configure Locations", "Create", new { controller = "Location" }, new { @class = "btn btn-default" })</p>
+        </div>
+    }
+    @if (Session["Disposal"] == null)
+    {
+        <div class="col-md-4">
+            <h2>Step 2: Set date/time of disposal</h2>
+            <p>By setting disposal date/time, the bin will be aware of the time that should be in storage and at the disposal destination.</p>
+            <p>@Html.ActionLink("Configure Disposal Date/Time", "Create", new { controller = "Disposal" }, new { @class = "btn btn-default" })</p>
+        </div>
+    }
+</div>
